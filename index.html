@@ -136,9 +136,23 @@ h2{font-size:clamp(2.4rem,7vw,5rem)}
 /* Contato */
 .contato{color:var(--branco)}
 .contato h2{color:var(--amarelo);max-width:13ch}
-.contato p{margin-top:22px;max-width:48ch;font-size:1.15rem}
-.email{display:flex;flex-wrap:wrap;align-items:center;gap:14px 20px;margin-top:30px}
-.email a.endereco{font-family:var(--display);font-weight:800;font-variation-settings:"wdth" 80;font-size:clamp(1.55rem,5.4vw,3.6rem);letter-spacing:-.03em;line-height:1.05;color:var(--branco);text-decoration-thickness:3px;text-underline-offset:6px;overflow-wrap:anywhere}
+.contato .dentro{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(28px,5vw,72px);align-items:start}
+@media (max-width:900px){.contato .dentro{grid-template-columns:1fr}}
+.contato p{margin-top:22px;max-width:44ch;font-size:1.15rem}
+.contato .alt{font-size:1rem;opacity:.95}
+.contato .alt a{font-weight:700;text-underline-offset:4px;overflow-wrap:anywhere}
+.formulario{background:var(--branco);color:var(--tinta);border-radius:22px;padding:clamp(18px,3vw,28px);box-shadow:0 30px 60px -20px rgba(8,14,60,.55);display:grid;gap:14px}
+.campo label{display:block;font-weight:700;font-size:.95rem;margin-bottom:6px}
+.campo label small{font-weight:500;color:#3A4370}
+.campo input{width:100%;font:inherit;padding:13px 14px;border:2px solid #C9D2EC;border-radius:12px;background:var(--branco);color:var(--tinta)}
+.campo input:focus-visible{outline:3px solid var(--cobalto);outline-offset:1px;border-color:var(--cobalto)}
+.formulario .botao{width:100%;background:var(--cobalto);color:var(--branco);margin-top:4px}
+.formulario .botao[disabled]{opacity:.6;cursor:wait;transform:none}
+.formulario p{margin:0;max-width:none;font-size:.85rem;color:#3A4370}
+.formulario p.retorno{font-size:1rem;font-weight:700;color:var(--tinta);border-radius:12px;padding:12px 14px;background:#E3F6EA}
+.formulario p.retorno[data-tipo="erro"]{background:#FDE7E3}
+.formulario p.retorno:empty{display:none}
+.escondido{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
 .rodape{padding:0 var(--lado) 40px;color:var(--branco);font-size:.92rem;opacity:.9}
 .rodape .dentro{border-top:1px solid rgba(255,255,255,.3);padding-top:20px;display:flex;flex-wrap:wrap;gap:8px 28px;justify-content:space-between}
 
@@ -240,7 +254,7 @@ h2{font-size:clamp(2.4rem,7vw,5rem)}
     <div class="dentro">
       <h2>Como funciona</h2>
       <ol class="passos">
-        <li><b>Você pede o diagnóstico</b><p>É grátis. A gente olha o perfil público da sua empresa e responde por e-mail com o que encontrou.</p></li>
+        <li><b>Você pede o diagnóstico</b><p>É grátis. Você preenche o formulário, a gente olha o perfil público da sua empresa e responde por e-mail com o que encontrou.</p></li>
         <li><b>Você decide</b><p>Se quiser o pacote, paga pelo link. Pagamento único, sem mensalidade obrigatória.</p></li>
         <li><b>O PDF chega em até 48 horas</b><p>Você copia, cola e pronto. Se travar em algum passo, é só responder o e-mail.</p></li>
       </ol>
@@ -276,7 +290,6 @@ h2{font-size:clamp(2.4rem,7vw,5rem)}
         <h2>Por que custa menos que agência</h2>
         <p>Somos um estúdio independente. Não temos escritório, vendedor nem reunião. O atendimento é só por e-mail.</p>
         <p>Os textos são feitos com inteligência artificial, e os dados do seu perfil são conferidos antes do envio.</p>
-        <p>Somos prestador pessoa física e não emitimos nota fiscal.</p>
       </div>
       <div>
         <h2>O que a gente não promete</h2>
@@ -291,12 +304,24 @@ h2{font-size:clamp(2.4rem,7vw,5rem)}
 
   <section class="faixa contato" id="contato">
     <div class="dentro">
-      <h2>Peça seu diagnóstico grátis</h2>
-      <p>Mande um e-mail com o nome da sua empresa e a cidade. A resposta chega em até 2 dias úteis.</p>
-      <div class="email">
-        <a class="endereco" href="mailto:vinidev.sites@gmail.com?subject=Diagn%C3%B3stico%20gr%C3%A1tis">vinidev.sites@gmail.com</a>
-        <button class="botao" type="button" id="copiar">Copiar e-mail</button>
+      <div>
+        <h2>Peça seu diagnóstico grátis</h2>
+        <p>Preencha o formulário. A gente olha o perfil da sua empresa e entra em contato por e-mail em até 2 dias úteis.</p>
+        <p class="alt">Prefere escrever direto? <a href="mailto:vinidev.sites@gmail.com?subject=Diagn%C3%B3stico%20gr%C3%A1tis">vinidev.sites@gmail.com</a></p>
       </div>
+      <form class="formulario" id="form-diagnostico" action="https://formsubmit.co/vinidev.sites@gmail.com" method="POST">
+        <input type="hidden" name="_subject" value="Pedido de diagnóstico grátis (site)">
+        <input type="hidden" name="_template" value="table">
+        <div class="escondido" aria-hidden="true"><label>Não preencha <input type="text" name="_honey" tabindex="-1" autocomplete="off"></label></div>
+        <div class="campo"><label for="f-nome">Seu nome</label><input id="f-nome" name="nome" type="text" autocomplete="name" required maxlength="80"></div>
+        <div class="campo"><label for="f-empresa">Nome da empresa</label><input id="f-empresa" name="empresa" type="text" autocomplete="organization" required maxlength="120"></div>
+        <div class="campo"><label for="f-cidade">Cidade e estado</label><input id="f-cidade" name="cidade" type="text" placeholder="Ex.: Itapema, SC" required maxlength="80"></div>
+        <div class="campo"><label for="f-email">Seu e-mail</label><input id="f-email" name="email" type="email" autocomplete="email" required maxlength="120"></div>
+        <div class="campo"><label for="f-perfil">Link do Google ou Instagram da empresa <small>(opcional)</small></label><input id="f-perfil" name="perfil" type="text" inputmode="url" maxlength="300"></div>
+        <button class="botao" type="submit" id="enviar">Pedir diagnóstico grátis</button>
+        <p class="retorno" id="retorno" role="status" aria-live="polite"></p>
+        <p>Usamos seus dados só para responder a este pedido. Para apagar, é só pedir por e-mail.</p>
+      </form>
     </div>
   </section>
 </main>
@@ -358,11 +383,31 @@ h2{font-size:clamp(2.4rem,7vw,5rem)}
     mostrar('depois', false);
   }
 
-  var copiar = document.getElementById('copiar');
-  copiar.addEventListener('click', function(){
-    var feito = function(){ copiar.textContent = 'E-mail copiado'; setTimeout(function(){ copiar.textContent = 'Copiar e-mail'; }, 2200); };
-    try { navigator.clipboard.writeText('vinidev.sites@gmail.com').then(feito, function(){ copiar.textContent = 'Copie: vinidev.sites@gmail.com'; }); }
-    catch (e) { copiar.textContent = 'Copie: vinidev.sites@gmail.com'; }
+  var form = document.getElementById('form-diagnostico');
+  var enviar = document.getElementById('enviar');
+  var retorno = document.getElementById('retorno');
+  function avisar(tipo, texto){ retorno.setAttribute('data-tipo', tipo); retorno.textContent = texto; }
+  form.addEventListener('submit', function(ev){
+    if (!window.fetch) return; // navegador antigo: envia do jeito tradicional
+    ev.preventDefault();
+    var dados = {};
+    Array.prototype.forEach.call(form.elements, function(c){ if (c.name) dados[c.name] = c.value.trim(); });
+    if (dados._honey) return;
+    enviar.disabled = true; enviar.textContent = 'Enviando...'; retorno.textContent = '';
+    fetch('https://formsubmit.co/ajax/vinidev.sites@gmail.com', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify(dados)
+    }).then(function(r){ if (!r.ok) throw new Error(r.status); return r.json(); })
+      .then(function(){
+        form.reset();
+        enviar.textContent = 'Pedido enviado';
+        avisar('ok', 'Pedido recebido. A resposta chega no seu e-mail em até 2 dias úteis.');
+      })
+      .catch(function(){
+        enviar.disabled = false; enviar.textContent = 'Pedir diagnóstico grátis';
+        avisar('erro', 'Não deu para enviar agora. Tente de novo ou escreva para vinidev.sites@gmail.com.');
+      });
   });
 })();
 </script>
