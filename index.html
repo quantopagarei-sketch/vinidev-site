@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Vinidev</title>
+<meta name="description" content="Estúdio independente que arruma o perfil da sua empresa no Google. Textos prontos por e-mail, a partir de R$&nbsp;297.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 32 32%27%3E%3Crect width=%2732%27 height=%2732%27 rx=%277%27 fill=%27%231B3FD6%27/%3E%3Cpath d=%27M16 6a7 7 0 0 0-7 7c0 5 7 13 7 13s7-8 7-13a7 7 0 0 0-7-7z%27 fill=%27%23FFD400%27/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,400..800&family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  /* Placa de comércio de rua: azul cobalto, amarelo de letreiro, pino vermelho de mapa.
+     Layout: tudo alinhado à esquerda, título gigante, e um perfil do Google que se arruma sozinho. */
+  --cobalto:#1B3FD6;
+  --amarelo:#FFD400;
+  --tinta:#0E1330;
+  --papel:#EEF2FB;
+  --branco:#FFFFFF;
+  --pino:#F0452B;
+  --display:"Bricolage Grotesque","Arial Narrow","Helvetica Neue",Arial,sans-serif;
+  --texto:"Figtree","Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  --lado:clamp(18px,5vw,72px);
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--cobalto);color:var(--tinta);font-family:var(--texto);font-size:1.0625rem;line-height:1.55}
+img,svg{max-width:100%}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--pino);outline-offset:3px;border-radius:4px}
+h1,h2,h3,p{margin:0}
+h1,h2{font-family:var(--display);font-weight:800;font-variation-settings:"wdth" 80;letter-spacing:-.03em;line-height:.92;text-wrap:balance}
+h2{font-size:clamp(2.4rem,7vw,5rem)}
+.faixa{padding:clamp(56px,9vw,120px) var(--lado)}
+.dentro{max-width:1240px;margin:0 auto}
+
+/* Botões */
+.botao{display:inline-block;font-family:var(--texto);font-weight:700;font-size:1.0625rem;text-decoration:none;border:0;cursor:pointer;padding:16px 26px;border-radius:999px;background:var(--amarelo);color:var(--tinta);transition:transform .15s ease}
+.botao:hover{transform:translateY(-2px)}
+.botao.escuro{background:var(--tinta);color:var(--branco)}
+
+/* Topo */
+.topo{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:20px var(--lado);color:var(--branco)}
+.marca{font-family:var(--display);font-weight:800;font-size:1.6rem;letter-spacing:-.03em;text-decoration:none;display:flex;align-items:center;gap:10px}
+.pino{width:16px;height:16px;border-radius:50% 50% 50% 0;background:var(--pino);transform:rotate(-45deg);display:inline-block;flex:none}
+.topo nav{display:flex;align-items:center;gap:clamp(12px,3vw,28px)}
+.topo nav a.link{text-decoration:none;font-weight:600}
+.topo nav a.link:hover{text-decoration:underline}
+.topo .botao{padding:11px 18px;font-size:.95rem}
+@media (max-width:520px){.topo nav a.link{display:none}}
+
+/* Abertura */
+.abertura{color:var(--branco);padding:clamp(20px,4vw,48px) var(--lado) clamp(56px,8vw,110px)}
+.abertura .dentro{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(28px,4vw,56px) clamp(28px,5vw,72px);align-items:start}
+.abertura h1{grid-column:1 / -1;font-size:clamp(3.4rem,10.4vw,9rem);color:var(--amarelo);text-wrap:wrap}
+.abertura .apoio{font-size:clamp(1.1rem,1.6vw,1.35rem);max-width:34ch}
+.abertura .acoes{display:flex;flex-wrap:wrap;align-items:center;gap:14px 22px;margin-top:28px}
+.abertura .acoes small{font-size:.95rem;opacity:.9}
+@media (max-width:900px){.abertura .dentro{grid-template-columns:1fr}}
+
+/* Perfil que se arruma */
+.perfil{background:var(--branco);color:var(--tinta);border-radius:22px;padding:18px;box-shadow:0 30px 60px -20px rgba(8,14,60,.55)}
+.busca{display:flex;align-items:center;gap:10px;border:2px solid var(--papel);border-radius:999px;padding:10px 16px;font-weight:600;min-height:46px}
+.lupa{width:15px;height:15px;border:2.5px solid var(--cobalto);border-radius:50%;position:relative;flex:none}
+.lupa::after{content:"";position:absolute;width:7px;height:2.5px;background:var(--cobalto);right:-7px;bottom:-4px;transform:rotate(45deg);border-radius:2px}
+.cursor{display:inline-block;width:2px;height:1.1em;background:var(--cobalto);vertical-align:-.18em;margin-left:1px;animation:pisca 1s steps(1) infinite}
+@keyframes pisca{50%{opacity:0}}
+.empresa{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;margin:18px 4px 6px}
+.empresa h3{font-family:var(--display);font-weight:800;font-size:1.45rem;letter-spacing:-.02em;line-height:1.05}
+.empresa .nota{font-weight:700;white-space:nowrap;font-variant-numeric:tabular-nums}
+.empresa .nota b{color:#B98900}
+.etiqueta{display:inline-block;margin:0 4px 10px;font-size:.82rem;font-weight:600;background:var(--papel);color:#3A4370;padding:3px 10px;border-radius:999px}
+.linhas{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.linha{display:grid;grid-template-columns:26px 1fr;gap:12px;align-items:start;background:var(--papel);border-radius:14px;padding:12px 14px;transition:background .35s ease}
+.linha .sinal{width:26px;height:26px;border-radius:50%;background:var(--pino);position:relative;transition:background .35s ease;margin-top:1px}
+.linha .sinal::before,.linha .sinal::after{content:"";position:absolute;left:50%;top:50%;width:12px;height:2.5px;background:var(--branco);border-radius:2px;transform:translate(-50%,-50%) rotate(45deg);transition:all .3s ease}
+.linha .sinal::after{transform:translate(-50%,-50%) rotate(-45deg)}
+.linha[data-ok="1"]{background:#E3F6EA}
+.linha[data-ok="1"] .sinal{background:#12924A}
+.linha[data-ok="1"] .sinal::before{width:7px;transform:translate(-95%,40%) rotate(45deg)}
+.linha[data-ok="1"] .sinal::after{width:13px;transform:translate(-28%,-50%) rotate(-50deg)}
+.linha strong{display:block;font-size:.95rem}
+.linha span.txt{display:block;font-size:.95rem;color:#3A4370}
+.linha[data-ok="1"] .antes,.linha[data-ok="0"] .depois{display:none}
+.troca{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:14px;flex-wrap:wrap}
+.troca .pares{display:inline-flex;background:var(--papel);border-radius:999px;padding:4px}
+.troca button{font:inherit;font-weight:700;font-size:.92rem;border:0;background:transparent;color:var(--tinta);padding:8px 16px;border-radius:999px;cursor:pointer}
+.troca button[aria-pressed="true"]{background:var(--cobalto);color:var(--branco)}
+.troca small{font-size:.82rem;color:#3A4370;max-width:30ch}
+
+/* O que chega */
+.chega{background:var(--papel)}
+.chega h2{color:var(--cobalto);max-width:12ch}
+.chega .intro{max-width:52ch;margin-top:22px;font-size:1.15rem}
+.itens{list-style:none;padding:0;margin:clamp(36px,5vw,64px) 0 0;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr));gap:0 clamp(24px,4vw,56px)}
+.itens li{display:grid;grid-template-columns:clamp(84px,9vw,120px) 1fr;gap:16px;align-items:center;padding:20px 0;border-top:2px solid rgba(27,63,214,.18)}
+.itens .num{font-family:var(--display);font-weight:800;font-variation-settings:"wdth" 78;font-size:clamp(3rem,6vw,4.6rem);line-height:.9;color:var(--cobalto);letter-spacing:-.04em;font-variant-numeric:tabular-nums}
+.itens .num small{display:block;font-family:var(--texto);font-size:.8rem;font-weight:700;letter-spacing:0;line-height:1;margin-bottom:4px}
+.itens b{display:block;font-size:1.1rem}
+.itens span.txt{color:#3A4370;font-size:.98rem}
+.chega .extra{margin-top:28px;max-width:60ch;color:#3A4370}
+
+/* Como funciona */
+.como{background:var(--amarelo)}
+.passos{list-style:none;padding:0;margin:clamp(32px,5vw,60px) 0 0;display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:clamp(24px,4vw,48px);counter-reset:passo}
+.passos li{counter-increment:passo;border-top:4px solid var(--tinta);padding-top:16px}
+.passos li::before{content:counter(passo);font-family:var(--display);font-weight:800;font-size:3.4rem;line-height:1;display:block;letter-spacing:-.04em}
+.passos b{display:block;font-size:1.25rem;margin:8px 0 6px;font-family:var(--display);font-weight:800;letter-spacing:-.02em}
+.passos p{max-width:34ch}
+
+/* Planos */
+.planos{background:var(--branco)}
+.planos h2{color:var(--tinta)}
+.lista-planos{margin-top:clamp(32px,5vw,56px);display:grid;gap:12px}
+.plano{display:grid;grid-template-columns:minmax(340px,.6fr) minmax(0,1.6fr) auto;gap:14px 32px;align-items:center;padding:clamp(20px,3vw,32px);border-radius:22px;background:var(--papel)}
+.plano h3{font-family:var(--display);font-weight:800;font-size:clamp(1.7rem,3vw,2.3rem);letter-spacing:-.03em;line-height:1}
+.plano p{max-width:52ch}
+.plano p + p{margin-top:8px;font-size:.95rem;opacity:.85}
+.preco{font-family:var(--display);font-weight:800;font-variation-settings:"wdth" 80;font-size:clamp(2.2rem,4.4vw,3.4rem);letter-spacing:-.04em;line-height:1;white-space:nowrap;text-align:right;font-variant-numeric:tabular-nums}
+.preco small{display:block;font-family:var(--texto);font-size:.88rem;font-weight:600;letter-spacing:0;margin-top:6px}
+.plano.destaque{background:var(--cobalto);color:var(--branco)}
+.plano.destaque .preco{color:var(--amarelo)}
+@media (max-width:900px){.plano{grid-template-columns:1fr}.preco{text-align:left}}
+
+/* Por que custa menos */
+.franco{background:var(--tinta);color:var(--branco)}
+.franco .dentro{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:clamp(36px,6vw,90px)}
+.franco h2{font-size:clamp(2rem,4.6vw,3.5rem);color:var(--amarelo)}
+.franco p{margin-top:20px;max-width:46ch;font-size:1.1rem}
+.franco ul{list-style:none;padding:0;margin:20px 0 0;display:grid;gap:14px;max-width:46ch}
+.franco li{padding-left:34px;position:relative;font-size:1.1rem}
+.franco li::before{content:"";position:absolute;left:0;top:.72em;width:20px;height:3px;background:var(--pino);border-radius:2px}
+
+/* Contato */
+.contato{color:var(--branco)}
+.contato h2{color:var(--amarelo);max-width:13ch}
+.contato p{margin-top:22px;max-width:48ch;font-size:1.15rem}
+.email{display:flex;flex-wrap:wrap;align-items:center;gap:14px 20px;margin-top:30px}
+.email a.endereco{font-family:var(--display);font-weight:800;font-variation-settings:"wdth" 80;font-size:clamp(1.55rem,5.4vw,3.6rem);letter-spacing:-.03em;line-height:1.05;color:var(--branco);text-decoration-thickness:3px;text-underline-offset:6px;overflow-wrap:anywhere}
+.rodape{padding:0 var(--lado) 40px;color:var(--branco);font-size:.92rem;opacity:.9}
+.rodape .dentro{border-top:1px solid rgba(255,255,255,.3);padding-top:20px;display:flex;flex-wrap:wrap;gap:8px 28px;justify-content:space-between}
+
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .botao,.linha,.linha .sinal,.linha .sinal::before,.linha .sinal::after{transition:none}
+  .cursor{animation:none}
+}
+</style>
+</head>
+<body>
+
+<header class="topo">
+  <a class="marca" href="#inicio"><span class="pino" aria-hidden="true"></span>Vinidev</a>
+  <nav aria-label="Principal">
+    <a class="link" href="#como">Como funciona</a>
+    <a class="link" href="#planos">Planos</a>
+    <a class="botao" href="#contato">Pedir diagnóstico grátis</a>
+  </nav>
+</header>
+
+<main id="inicio">
+  <section class="abertura">
+    <div class="dentro">
+      <h1>A gente arruma sua vitrine no Google.</h1>
+      <div>
+        <p class="apoio">Textos prontos para o perfil da sua empresa: descrição, respostas às avaliações, perguntas frequentes e postagens. Você só copia e cola.</p>
+        <div class="acoes">
+          <a class="botao" href="#contato">Pedir diagnóstico grátis</a>
+          <small>Sem ligação e sem reunião. Tudo por e-mail.</small>
+        </div>
+      </div>
+
+      <div class="perfil" id="perfil" data-estado="antes">
+        <div class="busca" aria-hidden="true"><span class="lupa"></span><span id="busca-texto">dentista em Itapema</span><span class="cursor"></span></div>
+        <div class="empresa">
+          <h3>Odonto Bem-te-vi</h3>
+          <span class="nota"><b>★</b> 4,6 (23)</span>
+        </div>
+        <span class="etiqueta">Exemplo fictício, só para mostrar o serviço</span>
+        <ul class="linhas">
+          <li class="linha" data-ok="0">
+            <span class="sinal" aria-hidden="true"></span>
+            <div><strong>Descrição</strong>
+              <span class="txt antes">Em branco. Quem chega não sabe o que a clínica faz.</span>
+              <span class="txt depois" id="descricao">Clínica odontológica em Itapema-SC. Implantes, clareamento, aparelho e clínico geral, com horário marcado.</span>
+            </div>
+          </li>
+          <li class="linha" data-ok="0">
+            <span class="sinal" aria-hidden="true"></span>
+            <div><strong>Avaliações respondidas</strong>
+              <span class="txt antes">Nenhuma das 23.</span>
+              <span class="txt depois">20 das 23, cada uma com resposta própria.</span>
+            </div>
+          </li>
+          <li class="linha" data-ok="0">
+            <span class="sinal" aria-hidden="true"></span>
+            <div><strong>Perguntas frequentes</strong>
+              <span class="txt antes">Nenhuma.</span>
+              <span class="txt depois">10 respondidas: convênio, prazo, formas de pagamento.</span>
+            </div>
+          </li>
+          <li class="linha" data-ok="0">
+            <span class="sinal" aria-hidden="true"></span>
+            <div><strong>Postagens</strong>
+              <span class="txt antes">Nenhuma.</span>
+              <span class="txt depois">8 prontas, duas por semana durante um mês.</span>
+            </div>
+          </li>
+        </ul>
+        <div class="troca">
+          <div class="pares" role="group" aria-label="Ver o perfil antes ou depois">
+            <button type="button" id="btn-antes" aria-pressed="true">Antes</button>
+            <button type="button" id="btn-depois" aria-pressed="false">Depois</button>
+          </div>
+          <small>A nota não muda sozinha. Quem melhora ela são seus clientes.</small>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="faixa chega" id="pacote">
+    <div class="dentro">
+      <h2>O que chega no seu e-mail</h2>
+      <p class="intro">Um PDF feito para a sua empresa, com tudo escrito. Em até 48 horas depois do pagamento.</p>
+      <ul class="itens">
+        <li><span class="num">1</span><div><b>Descrição do perfil</b><span class="txt">Pronta para colar, com seus serviços e sua cidade.</span></div></li>
+        <li><span class="num"><small>até</small>20</span><div><b>Respostas para avaliações</b><span class="txt">Uma para cada avaliação recente que ficou sem resposta.</span></div></li>
+        <li><span class="num">10</span><div><b>Perguntas e respostas</b><span class="txt">As dúvidas que os clientes do seu ramo mais têm.</span></div></li>
+        <li><span class="num">8</span><div><b>Postagens</b><span class="txt">Um mês inteiro, com sugestão de foto para cada uma.</span></div></li>
+        <li><span class="num">1</span><div><b>Mensagem de WhatsApp</b><span class="txt">Para pedir avaliação aos seus clientes, do jeito certo.</span></div></li>
+        <li><span class="num">1</span><div><b>Passo a passo</b><span class="txt">Onde colar cada coisa, pelo celular.</span></div></li>
+      </ul>
+      <p class="extra">Se você já tem site, vai junto o código que ajuda o Google e os assistentes de inteligência artificial a entender o seu negócio.</p>
+    </div>
+  </section>
+
+  <section class="faixa como" id="como">
+    <div class="dentro">
+      <h2>Como funciona</h2>
+      <ol class="passos">
+        <li><b>Você pede o diagnóstico</b><p>É grátis. A gente olha o perfil público da sua empresa e responde por e-mail com o que encontrou.</p></li>
+        <li><b>Você decide</b><p>Se quiser o pacote, paga pelo link. Pagamento único, sem mensalidade obrigatória.</p></li>
+        <li><b>O PDF chega em até 48 horas</b><p>Você copia, cola e pronto. Se travar em algum passo, é só responder o e-mail.</p></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="faixa planos" id="planos">
+    <div class="dentro">
+      <h2>Planos</h2>
+      <div class="lista-planos">
+        <article class="plano">
+          <h3>Essencial</h3>
+          <div><p>O pacote de textos para o perfil da sua empresa no Google, em PDF.</p></div>
+          <div class="preco">R$&nbsp;297<small>pagamento único</small></div>
+        </article>
+        <article class="plano destaque">
+          <h3>Premium</h3>
+          <div><p>O pacote Essencial e um site de uma página como este, com os textos, as cores e as fotos da sua empresa.</p><p>O endereço do site (domínio) fica no seu nome e custa cerca de R$&nbsp;40 por ano. Manutenção opcional: R$&nbsp;79 por mês.</p></div>
+          <div class="preco">R$&nbsp;897<small>pagamento único</small></div>
+        </article>
+        <article class="plano">
+          <h3>Acompanhamento</h3>
+          <div><p>Todo mês: respostas para as avaliações novas e 4 postagens. Para quem já tem o pacote.</p></div>
+          <div class="preco">R$&nbsp;147<small>por mês, cancele quando quiser</small></div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="faixa franco">
+    <div class="dentro">
+      <div>
+        <h2>Por que custa menos que agência</h2>
+        <p>Somos um estúdio independente. Não temos escritório, vendedor nem reunião. O atendimento é só por e-mail.</p>
+        <p>Os textos são feitos com inteligência artificial, e os dados do seu perfil são conferidos antes do envio.</p>
+        <p>Somos prestador pessoa física e não emitimos nota fiscal.</p>
+      </div>
+      <div>
+        <h2>O que a gente não promete</h2>
+        <ul>
+          <li>Primeiro lugar no Google. Ninguém pode prometer isso.</li>
+          <li>Mais clientes garantidos. Um perfil bem cuidado aumenta as chances, e só.</li>
+          <li>Avaliação comprada ou inventada. Nunca.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="faixa contato" id="contato">
+    <div class="dentro">
+      <h2>Peça seu diagnóstico grátis</h2>
+      <p>Mande um e-mail com o nome da sua empresa e a cidade. A resposta chega em até 2 dias úteis.</p>
+      <div class="email">
+        <a class="endereco" href="mailto:vinidev.sites@gmail.com?subject=Diagn%C3%B3stico%20gr%C3%A1tis">vinidev.sites@gmail.com</a>
+        <button class="botao" type="button" id="copiar">Copiar e-mail</button>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="rodape">
+  <div class="dentro">
+    <span>Vinidev, estúdio independente. Atendimento por e-mail.</span>
+    <span>Este site foi feito por nós, do mesmo jeito que faríamos o seu.</span>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var calmo = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var perfil = document.getElementById('perfil');
+  var linhas = Array.prototype.slice.call(perfil.querySelectorAll('.linha'));
+  var btnAntes = document.getElementById('btn-antes');
+  var btnDepois = document.getElementById('btn-depois');
+  var descricao = document.getElementById('descricao');
+  var textoDescricao = descricao.textContent;
+  var busca = document.getElementById('busca-texto');
+  var textoBusca = busca.textContent;
+  var relogios = [];
+
+  function limpar(){ relogios.forEach(clearTimeout); relogios = []; descricao.textContent = textoDescricao; }
+  function depois(ms, fn){ relogios.push(setTimeout(fn, ms)); }
+
+  function digitar(el, texto, passo, inicio){
+    el.textContent = '';
+    for (var i = 1; i <= texto.length; i++){
+      (function(n){ depois(inicio + n * passo, function(){ el.textContent = texto.slice(0, n); }); })(i);
+    }
+    return inicio + texto.length * passo;
+  }
+
+  function mostrar(estado, animar){
+    limpar();
+    perfil.setAttribute('data-estado', estado);
+    btnAntes.setAttribute('aria-pressed', estado === 'antes');
+    btnDepois.setAttribute('aria-pressed', estado === 'depois');
+    if (estado === 'antes'){ linhas.forEach(function(l){ l.setAttribute('data-ok', '0'); }); return; }
+    if (!animar || calmo){ linhas.forEach(function(l){ l.setAttribute('data-ok', '1'); }); return; }
+    linhas.forEach(function(l, i){
+      depois(i * 520, function(){
+        l.setAttribute('data-ok', '1');
+        if (i === 0) digitar(descricao, textoDescricao, 14, 0);
+      });
+    });
+  }
+
+  btnAntes.addEventListener('click', function(){ mostrar('antes', false); });
+  btnDepois.addEventListener('click', function(){ mostrar('depois', true); });
+
+  // Um único momento ao abrir: a busca é digitada e o perfil se arruma.
+  if (!calmo){
+    var fim = digitar(busca, textoBusca, 55, 500);
+    depois(fim + 500, function(){ mostrar('depois', true); });
+  } else {
+    mostrar('depois', false);
+  }
+
+  var copiar = document.getElementById('copiar');
+  copiar.addEventListener('click', function(){
+    var feito = function(){ copiar.textContent = 'E-mail copiado'; setTimeout(function(){ copiar.textContent = 'Copiar e-mail'; }, 2200); };
+    try { navigator.clipboard.writeText('vinidev.sites@gmail.com').then(feito, function(){ copiar.textContent = 'Copie: vinidev.sites@gmail.com'; }); }
+    catch (e) { copiar.textContent = 'Copie: vinidev.sites@gmail.com'; }
+  });
+})();
+</script>
+</body>
+</html>
