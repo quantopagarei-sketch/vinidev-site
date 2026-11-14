@@ -494,7 +494,7 @@ h2{font-size:clamp(2.2rem,6.4vw,4.6rem)}
         </ol>
         <p class="alt">Prefere escrever direto? <a href="mailto:vinidev.sites@gmail.com?subject=Diagn%C3%B3stico%20gr%C3%A1tis">vinidev.sites@gmail.com</a></p>
       </div>
-      <form class="formulario" id="form-diagnostico" action="https://formsubmit.co/vinidev.sites@gmail.com" method="POST">
+      <form class="formulario" id="form-diagnostico" action="https://formsubmit.co/bb918965b4c21be549024a23c95e8d0d" method="POST">
         <input type="hidden" name="_subject" value="Pedido de diagnóstico grátis (site)">
         <input type="hidden" name="_template" value="table">
         <div class="escondido" aria-hidden="true"><label>Não preencha <input type="text" name="_honey" tabindex="-1" autocomplete="off"></label></div>
@@ -618,7 +618,7 @@ h2{font-size:clamp(2.2rem,6.4vw,4.6rem)}
     Array.prototype.forEach.call(form.elements, function(c){ if (c.name) dados[c.name] = c.value.trim(); });
     if (dados._honey) return;
     enviar.disabled = true; enviar.textContent = 'Enviando...'; retorno.textContent = '';
-    fetch('https://formsubmit.co/ajax/vinidev.sites@gmail.com', {
+    fetch('https://formsubmit.co/ajax/bb918965b4c21be549024a23c95e8d0d', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
       body: JSON.stringify(dados)
